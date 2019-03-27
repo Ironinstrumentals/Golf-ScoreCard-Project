@@ -4,36 +4,17 @@ html {
   display: flex; }
   html body {
     height: 98%;
-    width: 100%; }
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    display: flex; }
     html body .container {
-      margin-top: 15%;
       width: 100%;
       display: flex;
       justify-content: center;
       align-content: center;
       text-align: center; }
-      html body .container .playerbox {
-        border: 1px solid #dadfea;
-        padding: 10px;
-        margin-right: 0; }
-        html body .container .playerbox .namerow {
-          height: 25px;
-          width: 100%; }
-      html body .container .card {
-        display: flex;
-        border: 1px solid #dadfea; }
-
-.column {
-  border-right: 1px solid #dadfea;
-  padding: 10px; }
-
-.column:last-child {
-  border: none; }
-
-.hole {
-  border: 1px solid #dadfea;
-  height: 25px;
-  width: 40px; }
 
 .fadeIn {
   animation-name: fadeIn;
@@ -69,3 +50,11 @@ html {
   100% {
     -webkit-transform: scale(1);
     opacity: 1; } }
+
+.card-text {
+  margin-top: 1px;
+  margin-bottom: 15px; }
+
+.card-subtitle {
+  margin-bottom: 0;
+  margin-top: 10px; }
