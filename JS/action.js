@@ -89,7 +89,7 @@ function inputPlayers() {
       <option>3</option>
       <option>4</option>
     </select>
-    <div id="aBomb"><div><label><input style="margin-top: 10px;"></label></div></div>
+    <div id="aBomb"><div><label><input style="margin-top: 10px;" id="P0" value="P0" onchange="playerPush()"></label></div></div><a href="#" class="card-link" onclick="loadSelect()">Back</a><a href="#" class="card-link" onclick="playerPush()">Continue</a>
   </div>
 </form>
 </h5>`
@@ -99,7 +99,16 @@ function inputPBoxNum() {
     document.getElementById('aBomb').innerHTML = '';
     playerNumBox = document.getElementById('playerNumBox').value;
     for (let i = 0; i < playerNumBox; i++) {
-        document.getElementById('aBomb').innerHTML += `<div><label><input style='margin-top: 10px;' id="P${i}" value="P${i}"></label></div>`
+        document.getElementById('aBomb').innerHTML += `<div><label><input style='margin-top: 10px;' id="P${i}" value="P${i}" onchange="playerPush()"></label></div>`
     }
+    document.getElementById('aBomb').innerHTML += `<a href="#" class="card-link" onclick="loadSelect()">Back</a><a href="#" class="card-link" onclick="playerPush()">Continue</a>`;
+}
 
+function playerPush() {
+    players = [];
+    for (let i = 0; i < playerNumBox; i++) {
+        players.push(document.getElementById(`P${i}`).value);
+        console.log(document.getElementById(`P${i}`).value);
+    }
+    console.log(players);
 }
