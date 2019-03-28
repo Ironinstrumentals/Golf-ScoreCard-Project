@@ -3,15 +3,15 @@ html {
   width: 100%;
   display: flex; }
   html body {
-    height: 98%;
+    display: flex;
+    height: 100%;
     width: 100%;
     align-content: center;
     justify-content: center;
-    align-items: center;
-    display: flex; }
+    align-items: center; }
     html body .container {
-      width: 100%;
       display: flex;
+      margin-top: 12px;
       justify-content: center;
       align-content: center;
       text-align: center; }
@@ -58,3 +58,19 @@ html {
 .card-subtitle {
   margin-bottom: 0;
   margin-top: 10px; }
+
+.rowCont {
+  display: flex;
+  flex-direction: row; }
+
+.card-header {
+  padding: 10px; }
+
+.list-group-item {
+  padding: 5px; }
+
+.zucc {
+  padding: 0;
+  height: 100%;
+  width: 50px;
+  text-align: center; }
