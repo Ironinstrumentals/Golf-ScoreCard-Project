@@ -3,7 +3,6 @@ html {
   width: 100%;
   display: flex; }
   html body {
-    display: flex;
     height: 100%;
     width: 100%;
     align-content: center;
@@ -64,10 +63,11 @@ html {
   flex-direction: row; }
 
 .card-header {
-  padding: 10px; }
+  padding: 10px;
+  border: solid lightgray 1px; }
 
 .list-group-item {
-  padding: 5px; }
+  padding: 4px; }
 
 .zucc {
   padding: 0;

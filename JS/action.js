@@ -1,7 +1,7 @@
 let players = [];
 let donut;
 let plrCnt = players.length;
-let Box, selCourseID, selCourse, selCourseHoles;
+let Box, selCourseID, selCourse, selCourseHoles, Holes = [];
 let totalScore = 0;
 //let yardage;
 let tBox;
@@ -39,8 +39,7 @@ function getCourse(courseid){
             console.log(selCourse);
             selCourseHoles = selCourse.data.holes;
             console.log(selCourseHoles);
-            //tBox = selCourse.data.holes[].teeBoxes;
-            document.getElementById('container').innerHTML = `<div class="card fadeIn codex"><img src="${selCourse.data.thumbnail}" style='width: 22rem' class="card-img-top" alt="Picture of ${selCourse.data.name}"><div class="card-body fadeIn" id="displayCourse"><h5 class="card-title">${selCourse.data.name}</h5><h6 class="card-subtitle text-muted">Address:</h6><p class="card-text">${selCourse.data.addr1}, ${selCourse.data.city}, ${selCourse.data.stateOrProvince}, ${selCourse.data.zipCode}</p><p class="card-text"><h6 class="card-subtitle text-muted">Phone:</h6>${selCourse.data.phone}</p><h6 class="card-subtitle text-muted">Course Type:</h6><p class="card-text">${selCourse.data.courseType}</p><h6 class="card-subtitle text-muted">Status:</h6><p class="card-text">${selCourse.data.status}</p><h6 class="card-subtitle text-muted">Holes:</h6><p class="card-text">${selCourse.data.holeCount}</p><a href="#" class="card-link" onclick="loadSelect()">Back</a><a href="#" class="card-link" onclick="inputPlayers()">Select</a></div></div>`
+            document.getElementById('container').innerHTML = `<div class="card fadeIn codex"><img src="${selCourse.data.thumbnail}" style='width: 22rem' class="card-img-top" alt="Picture of ${selCourse.data.name}"><div class="card-body fadeIn" id="displayCourse"><h5 class="card-title">${selCourse.data.name}</h5><h6 class="card-subtitle text-muted">Address:</h6><p class="card-text">${selCourse.data.addr1}, ${selCourse.data.city}, ${selCourse.data.stateOrProvince}, ${selCourse.data.zipCode}</p><p class="card-text"><h6 class="card-subtitle text-muted">Phone:</h6>${selCourse.data.phone}</p><h6 class="card-subtitle text-muted">Course Type:</h6><p class="card-text">${selCourse.data.courseType}</p><h6 class="card-subtitle text-muted">Status:</h6><p class="card-text">${selCourse.data.status}</p><h6 class="card-subtitle text-muted">Holes:</h6><p class="card-text">${selCourse.data.holeCount}</p><a href="#" class="card-link fadeIn" onclick="loadSelect()">Back</a><a href="#" class="card-link fadeIn" onclick="inputPlayers()">Select</a></div></div>`
         }
     };
     xhttp.open('GET', 'https://golf-courses-api.herokuapp.com/courses/' + courseid, true);
@@ -66,7 +65,7 @@ function loadSelect(){
                     selCourseID =  Box.courses[i].id;
                     //console.log(Box.courses[i].name);
                     document.getElementById('selectCourseCard').innerHTML +=
-                        `<div class="fadeIn"><a href="#" id='${Box.courses[i].id}' class="card-link" onclick="getCourse(this.id)">${Box.courses[i].name}</a></div>`;
+                        `<div class="fadeIn"><a href="#" id='${Box.courses[i].id}' class="card-link fadeIn" onclick="getCourse(this.id)">${Box.courses[i].name}</a></div>`;
                 }
             }
 
@@ -95,7 +94,17 @@ function inputPlayers() {
       <option>3</option>
       <option>4</option>
     </select>
-    <div id="aBomb"><div><label><input class='fadeIn' style="margin-top: 10px;" id="P0" onchange="playerPush()" oninput="playerPush()" onload="playerPush()"></label></div><a href="#" class="card-link" onclick="loadSelect()">Back</a><a href="#" class="card-link" onclick="createCard()">Continue</a></div>
+    <div id="aBomb"><div><label class="fadeIn">Name: <input class='fadeIn' style="margin-top: 10px;" id="P0" onchange="playerPush()" oninput="playerPush()" onload="playerPush()"></label></div>
+    <div>
+<label for="teeBox0">Select Tee:</label>
+<select id="teeBox0" class="fadeIn">
+<option>Pro</option>
+<option>Champion</option>
+<option>Men</option>
+<option>Women</option>
+</select>
+</div>
+<a href="#" class="card-link fadeIn" onclick="loadSelect()">Back</a><a href="#" class="card-link fadeIn" onclick="createCard()">Continue</a></div>
   </div>
 </form>
 </h5>`
@@ -105,9 +114,19 @@ function inputPBoxNum() {
     document.getElementById('aBomb').innerHTML = '';
     playerNumBox = document.getElementById('playerNumBox').value;
     for (let i = 0; i < playerNumBox; i++) {
-        document.getElementById('aBomb').innerHTML += `<div><label><input class='fadeIn' style='margin-top: 10px;' id="P${i}" onchange="playerPush()" oninput="playerPush()" onload="playerPush()"></label></div>`
+        document.getElementById('aBomb').innerHTML += `<div><label class="fadeIn">Name: <input class='fadeIn' style='margin-top: 10px;' id="P${i}" onchange="playerPush()" oninput="playerPush()" onload="playerPush()"></label></div>
+<div>
+<label for="teeBox${i}">Select Tee:</label>
+<select id="teeBox${i}" class="fadeIn">
+<option>Pro</option>
+<option>Champion</option>
+<option>Men</option>
+<option>Women</option>
+</select>
+</div>
+`
     }
-    document.getElementById('aBomb').innerHTML += `<a href="#" class="card-link" onclick="loadSelect()">Back</a><a href="#" class="card-link" onclick="createCard()">Continue</a>`;
+    document.getElementById('aBomb').innerHTML += `<a href="#" class="card-link fadeIn" onclick="loadSelect()">Back</a><a href="#" class="card-link fadeIn" onclick="createCard()">Continue</a>`;
 }
 
 function playerPush() {
@@ -126,26 +145,31 @@ function playerPush() {
 function createCard() {
     document.getElementById('selectCourseCard').innerHTML =
         `
+
 <div class="rowCont">
 <div class="card" id='scorecard' style="flex-direction: row;">
 <div id="holeCol">
   <div class="card-header">
-    Holes
+    Hole
   </div>
 </div>
-<div id="HCap">
+<div id="yardCol">
 <div class="card-header">
-H-Cap
+Yards
 </div>
 </div>
-<div id="Tee">
+<div id="hcapCol">
 <div class="card-header">
-Tee
+HCP
+</div>
+</div>
+<div id="parCol">
+<div class="card-header">
+Par
 </div>
 </div>
 </div>
 </div>
-
 `;
 
     for (let i = 0; i < players.length; i++) {
@@ -160,7 +184,13 @@ Tee
 
         //document.getElementById('yardage').innerHTML += `<li class="list-group-item">${selCourse.data.holes[i].teeBoxes[tBox].yards}</li>`;
 
-        document.getElementById('holeCol').innerHTML += `<li class="list-group-item">H${i + 1}</li>`;
+        document.getElementById('holeCol').innerHTML += `<li class="list-group-item">${i + 1}</li>`;
+        for (let j = 0; j < 1; j++) {
+            document.getElementById('hcapCol').innerHTML += `<li class="list-group-item">${selCourse.data.holes[i].teeBoxes[j].hcp}</li>`;
+            document.getElementById('yardCol').innerHTML += `<li class="list-group-item">${selCourse.data.holes[i].teeBoxes[j].yards}</li>`;
+            document.getElementById('parCol').innerHTML += `<li class="list-group-item">${selCourse.data.holes[i].teeBoxes[j].par}</li>`;
+        }
+
 
     }
     for (let i = 0; i < players.length; i++) {
@@ -215,5 +245,10 @@ function updateScore() {
             }
         }
     }
+
+}
+
+
+function selectTee() {
 
 }
