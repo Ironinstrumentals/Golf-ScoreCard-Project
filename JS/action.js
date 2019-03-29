@@ -1,8 +1,4 @@
-let players = [];
-let donut;
-let Box, selCourseID, selCourse, selCourseHoles, Holes = [];
-let totalScore = 0;
-let playerNumBox;
+let Box, selCourseID, selCourse, selCourseHoles, donut, playerNumBox, players = [], totalScore = 0;
 getCourses();
 function getCourses() {
     var xhttp = new XMLHttpRequest();
