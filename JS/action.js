@@ -1,10 +1,7 @@
 let players = [];
 let donut;
-let plrCnt = players.length;
 let Box, selCourseID, selCourse, selCourseHoles, Holes = [];
 let totalScore = 0;
-//let yardage;
-let tBox;
 let playerNumBox;
 getCourses();
 function getCourses() {
@@ -16,26 +13,19 @@ function getCourses() {
                 `<div class="card fadeIn codex"><div class="card-body" id="selectCourseCard"><h5 class="card-title">Select Course:</h5></div></div>`;
             for (let i = 0; i < Box.courses.length; i++) {
                 selCourseID =  Box.courses[i].id;
-                //console.log(Box.courses[i].name);
                 document.getElementById('selectCourseCard').innerHTML +=
                     `<div class="fadeIn"><a href="#" id='${Box.courses[i].id}' class="card-link" onclick="getCourse(this.id)">${Box.courses[i].name}</a></div>`
             }
-
-
         }
     };
     xhttp.open('GET', 'https://golf-courses-api.herokuapp.com/courses', true);
     xhttp.send();
 }
-
-
-
 function getCourse(courseid){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             selCourse = JSON.parse(this.responseText);
-            //document.getElementById('container').innerHTML += `<div>${courseid}</div>`;
             console.log(selCourse);
             selCourseHoles = selCourse.data.holes;
             console.log(selCourseHoles);
@@ -45,12 +35,6 @@ function getCourse(courseid){
     xhttp.open('GET', 'https://golf-courses-api.herokuapp.com/courses/' + courseid, true);
     xhttp.send();
 }
-
-
-
-
-
-
 function loadSelect(){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -58,12 +42,10 @@ function loadSelect(){
             Box = JSON.parse(this.responseText);
             for (let i = 0; i < Box.courses.length; i++) {
                 selCourseID =  Box.courses[i].id;
-                //console.log(Box.courses[i].name);
                 document.getElementById('container').innerHTML =
                     `<div class="card fadeIn"><div class="card-body" id="selectCourseCard"><h5 class="card-title">Select Course:</h5></div></div>`;
                 for (let i = 0; i < Box.courses.length; i++) {
                     selCourseID =  Box.courses[i].id;
-                    //console.log(Box.courses[i].name);
                     document.getElementById('selectCourseCard').innerHTML +=
                         `<div class="fadeIn"><a href="#" id='${Box.courses[i].id}' class="card-link fadeIn" onclick="getCourse(this.id)">${Box.courses[i].name}</a></div>`;
                 }
@@ -134,9 +116,7 @@ function playerPush() {
     players.push(document.getElementById(`P0`));
     for (let i = 1; i < playerNumBox; i++) {
         players.push(document.getElementById(`P${i}`));
-        //console.log(document.getElementById(`P${i}`));
     }
-    //console.log(players);
 }
 
 
@@ -181,8 +161,6 @@ Par
 
 
     for (let i = 0; i < selCourseHoles.length; i++) {
-
-        //document.getElementById('yardage').innerHTML += `<li class="list-group-item">${selCourse.data.holes[i].teeBoxes[tBox].yards}</li>`;
 
         document.getElementById('holeCol').innerHTML += `<li class="list-group-item">${i + 1}</li>`;
         for (let j = 0; j < 1; j++) {
