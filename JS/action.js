@@ -1,4 +1,8 @@
-let Box, selCourseID, selCourse, selCourseHoles, donut, playerNumBox, players = [], totalScore = 0;
+let players = [];
+let donut;
+let Box, selCourseID, selCourse, selCourseHoles, Holes = [];
+let totalScore = 0;
+let playerNumBox;
 getCourses();
 function getCourses() {
     var xhttp = new XMLHttpRequest();
@@ -69,8 +73,8 @@ function inputPlayers() {
     </select>
     <div id="aBomb"><div><label class="fadeIn">Name: <input class='fadeIn' style="margin-top: 10px;" id="P0" onchange="playerPush()" oninput="playerPush()" onload="playerPush()"></label></div>
     <div>
-<label for="teeBox0">Select Tee:</label>
-<select id="teeBox0" class="fadeIn">
+<label for="teeBox" class="fadeIn">Select Tee:</label>
+<select id="teeBox" class="fadeIn">
 <option>Pro</option>
 <option>Champion</option>
 <option>Men</option>
@@ -86,19 +90,17 @@ function inputPBoxNum() {
     document.getElementById('aBomb').innerHTML = '';
     playerNumBox = document.getElementById('playerNumBox').value;
     for (let i = 0; i < playerNumBox; i++) {
-        document.getElementById('aBomb').innerHTML += `<div><label class="fadeIn">Name: <input class='fadeIn' style='margin-top: 10px;' id="P${i}" onchange="playerPush()" oninput="playerPush()" onload="playerPush()"></label></div>
-<div>
-<label for="teeBox${i}">Select Tee:</label>
-<select id="teeBox${i}" class="fadeIn">
+        document.getElementById('aBomb').innerHTML += `<div><label class="fadeIn">Name: <input class='fadeIn' style='margin-top: 10px;' id="P${i}" onchange="playerPush()" oninput="playerPush()" onload="playerPush()"></label></div>`
+    }
+    document.getElementById('aBomb').innerHTML += `<div>
+<label for="teeBox" class="fadeIn">Select Tee:</label>
+<select id="teeBox" class="fadeIn">
 <option>Pro</option>
 <option>Champion</option>
 <option>Men</option>
 <option>Women</option>
 </select>
-</div>
-`
-    }
-    document.getElementById('aBomb').innerHTML += `<a href="#" class="card-link fadeIn" onclick="loadSelect()">Back</a><a href="#" class="card-link fadeIn" onclick="createCard()">Continue</a>`;
+</div><a href="#" class="card-link fadeIn" onclick="loadSelect()">Back</a><a href="#" class="card-link fadeIn" onclick="createCard()">Continue</a>`;
 }
 function playerPush() {
     players = [];
@@ -135,6 +137,12 @@ Par
 </div>
 </div>
 `;
+    for (let i = 0; i < players.length; i++) {
+        document.getElementById('scorecard').innerHTML += `
+<div id="playerCol${i}">
+
+</div>`
+    }
     for (let i = 0; i < selCourseHoles.length; i++) {
         document.getElementById('holeCol').innerHTML += `<li class="list-group-item">${i + 1}</li>`;
         for (let j = 0; j < 1; j++) {
@@ -148,8 +156,7 @@ Par
         document.getElementById(`playerCol${donut}`).innerHTML += `
 <div id='P${donut}' class="card-header">
 ${players[donut].value}
-</div>
-`;
+</div`;
         for (let i = 0; i < selCourseHoles.length; i++) {
             document.getElementById(`playerCol${donut}`).innerHTML += `<li id='P${donut}H${i}Z' class="list-group-item"><input type='number' class='zucc' id="P${donut}H${i}" value="0" oninput="updateScore()" onchange="updateScore()"></li>`
 
@@ -165,6 +172,8 @@ ${players[donut].value}
 function updateScore() {
     totalScore = 0;
     let cheese;
+
+
     for (let i = 0; i < players.length; i++) {
         totalScore = 0;
         for (let j = 0; j < selCourseHoles.length; j++) {
@@ -178,6 +187,7 @@ function updateScore() {
             } else {
                 totalScore = totalScore + parseInt(cheese);
             }
+
         }
         document.getElementById(`total${players[i].value}`).innerText = totalScore;
         if (totalScore > 0) {
@@ -190,4 +200,5 @@ function updateScore() {
             }
         }
     }
+
 }
