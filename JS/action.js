@@ -1,8 +1,4 @@
-let players = [];
-let donut;
-let Box, selCourseID, selCourse, selCourseHoles, Holes = [];
-let totalScore = 0;
-let playerNumBox;
+let Box, selCourseID, selCourse, selCourseHoles, playerNumBox, donut, players = [], totalScore = 0;
 getCourses();
 function getCourses() {
     var xhttp = new XMLHttpRequest();
@@ -50,7 +46,6 @@ function loadSelect(){
                         `<div class="fadeIn"><a href="#" id='${Box.courses[i].id}' class="card-link fadeIn" onclick="getCourse(this.id)">${Box.courses[i].name}</a></div>`;
                 }
             }
-
         }
     };
     xhttp.open('GET', 'https://golf-courses-api.herokuapp.com/courses', true);
@@ -159,7 +154,6 @@ ${players[donut].value}
 </div`;
         for (let i = 0; i < selCourseHoles.length; i++) {
             document.getElementById(`playerCol${donut}`).innerHTML += `<li id='P${donut}H${i}Z' class="list-group-item"><input type='number' class='zucc' id="P${donut}H${i}" value="0" oninput="updateScore()" onchange="updateScore()"></li>`
-
         }
     }
     document.getElementById('holeCol').innerHTML += `<li class='list-group-item'>Total:</li>`;
@@ -172,8 +166,6 @@ ${players[donut].value}
 function updateScore() {
     totalScore = 0;
     let cheese;
-
-
     for (let i = 0; i < players.length; i++) {
         totalScore = 0;
         for (let j = 0; j < selCourseHoles.length; j++) {
@@ -187,7 +179,6 @@ function updateScore() {
             } else {
                 totalScore = totalScore + parseInt(cheese);
             }
-
         }
         document.getElementById(`total${players[i].value}`).innerText = totalScore;
         if (totalScore > 0) {
@@ -200,5 +191,4 @@ function updateScore() {
             }
         }
     }
-
 }
