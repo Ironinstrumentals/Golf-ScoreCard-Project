@@ -56,11 +56,6 @@ function loadSelect(){
     xhttp.open('GET', 'https://golf-courses-api.herokuapp.com/courses', true);
     xhttp.send();
 }
-
-
-
-
-
 function inputPlayers() {
     document.getElementById('container').innerHTML =
         `<div class="card fadeIn codex"><div class="card-body" id="selectCourseCard"><h5 class="card-title">Input Players:</h5></div></div>`;
@@ -91,7 +86,6 @@ function inputPlayers() {
 </form>
 </h5>`
 }
-
 function inputPBoxNum() {
     document.getElementById('aBomb').innerHTML = '';
     playerNumBox = document.getElementById('playerNumBox').value;
@@ -110,7 +104,6 @@ function inputPBoxNum() {
     }
     document.getElementById('aBomb').innerHTML += `<a href="#" class="card-link fadeIn" onclick="loadSelect()">Back</a><a href="#" class="card-link fadeIn" onclick="createCard()">Continue</a>`;
 }
-
 function playerPush() {
     players = [];
     players.push(document.getElementById(`P0`));
@@ -118,14 +111,9 @@ function playerPush() {
         players.push(document.getElementById(`P${i}`));
     }
 }
-
-
-
-
 function createCard() {
     document.getElementById('selectCourseCard').innerHTML =
         `
-
 <div class="rowCont">
 <div class="card" id='scorecard' style="flex-direction: row;">
 <div id="holeCol">
@@ -151,25 +139,13 @@ Par
 </div>
 </div>
 `;
-
-    for (let i = 0; i < players.length; i++) {
-        document.getElementById('scorecard').innerHTML += `
-<div id="playerCol${i}">
-
-</div>`
-    }
-
-
     for (let i = 0; i < selCourseHoles.length; i++) {
-
         document.getElementById('holeCol').innerHTML += `<li class="list-group-item">${i + 1}</li>`;
         for (let j = 0; j < 1; j++) {
             document.getElementById('hcapCol').innerHTML += `<li class="list-group-item">${selCourse.data.holes[i].teeBoxes[j].hcp}</li>`;
             document.getElementById('yardCol').innerHTML += `<li class="list-group-item">${selCourse.data.holes[i].teeBoxes[j].yards}</li>`;
             document.getElementById('parCol').innerHTML += `<li class="list-group-item">${selCourse.data.holes[i].teeBoxes[j].par}</li>`;
         }
-
-
     }
     for (let i = 0; i < players.length; i++) {
         donut = i;
@@ -178,7 +154,6 @@ Par
 ${players[donut].value}
 </div>
 `;
-
         for (let i = 0; i < selCourseHoles.length; i++) {
             document.getElementById(`playerCol${donut}`).innerHTML += `<li id='P${donut}H${i}Z' class="list-group-item"><input type='number' class='zucc' id="P${donut}H${i}" value="0" oninput="updateScore()" onchange="updateScore()"></li>`
 
@@ -191,12 +166,9 @@ ${players[donut].value}
         document.getElementById(`playerCol${i}`).innerHTML += `<li class='list-group-item' id="note${players[i].value}">OK</li>`
     }
 }
-
 function updateScore() {
     totalScore = 0;
     let cheese;
-
-
     for (let i = 0; i < players.length; i++) {
         totalScore = 0;
         for (let j = 0; j < selCourseHoles.length; j++) {
@@ -210,7 +182,6 @@ function updateScore() {
             } else {
                 totalScore = totalScore + parseInt(cheese);
             }
-
         }
         document.getElementById(`total${players[i].value}`).innerText = totalScore;
         if (totalScore > 0) {
@@ -223,10 +194,4 @@ function updateScore() {
             }
         }
     }
-
-}
-
-
-function selectTee() {
-
 }
