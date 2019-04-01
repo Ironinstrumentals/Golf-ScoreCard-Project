@@ -23,7 +23,7 @@ function getCourse(courseid){
         if (this.readyState == 4 && this.status == 200) {
             selCourse = JSON.parse(this.responseText);
             selCourseHoles = selCourse.data.holes;
-            document.getElementById('container').innerHTML = `<div class="card fadeIn codex"><img src="${selCourse.data.thumbnail}" style='width: 22rem' class="card-img-top" alt="Picture of ${selCourse.data.name}"><div class="card-body fadeIn" id="displayCourse"><h5 class="card-title">${selCourse.data.name}</h5><h6 class="card-subtitle text-muted">Address:</h6><p class="card-text">${selCourse.data.addr1}, ${selCourse.data.city}, ${selCourse.data.stateOrProvince}, ${selCourse.data.zipCode}</p><p class="card-text"><h6 class="card-subtitle text-muted">Phone:</h6>${selCourse.data.phone}</p><h6 class="card-subtitle text-muted">Course Type:</h6><p class="card-text">${selCourse.data.courseType}</p><h6 class="card-subtitle text-muted">Status:</h6><p class="card-text">${selCourse.data.status}</p><h6 class="card-subtitle text-muted">Holes:</h6><p class="card-text">${selCourse.data.holeCount}</p><a href="#" class="card-link fadeIn" onclick="loadSelect()">Back</a><a href="#" class="card-link fadeIn" onclick="inputPlayers()">Select</a></div></div>`
+            document.getElementById('container').innerHTML = `<div class="card fadeIn codex"><img src="${selCourse.data.thumbnail}" class="card-img-top" alt="Picture of ${selCourse.data.name}"><div class="card-body fadeIn" id="displayCourse"><h5 class="card-title">${selCourse.data.name}</h5><h6 class="card-subtitle text-muted">Address:</h6><p class="card-text">${selCourse.data.addr1}, ${selCourse.data.city}, ${selCourse.data.stateOrProvince}, ${selCourse.data.zipCode}</p><p class="card-text"><h6 class="card-subtitle text-muted">Phone:</h6>${selCourse.data.phone}</p><h6 class="card-subtitle text-muted">Course Type:</h6><p class="card-text">${selCourse.data.courseType}</p><h6 class="card-subtitle text-muted">Status:</h6><p class="card-text">${selCourse.data.status}</p><h6 class="card-subtitle text-muted">Holes:</h6><p class="card-text">${selCourse.data.holeCount}</p><a href="#" class="card-link fadeIn" onclick="loadSelect()">Back</a><a href="#" class="card-link fadeIn" onclick="inputPlayers()">Select</a></div></div>`
         }
     };
     xhttp.open('GET', 'https://golf-courses-api.herokuapp.com/courses/' + courseid, true);
@@ -136,14 +136,21 @@ Par
 
 </div>`
     }
+    let  tyrd = 0;
     for (let i = 0; i < selCourseHoles.length; i++) {
+
         document.getElementById('holeCol').innerHTML += `<li class="list-group-item">${i + 1}</li>`;
         for (let j = 0; j < 1; j++) {
+            tyrd = tyrd + parseInt(`${selCourse.data.holes[i].teeBoxes[j].yards}`);
             document.getElementById('hcapCol').innerHTML += `<li class="list-group-item">${selCourse.data.holes[i].teeBoxes[j].hcp}</li>`;
-            document.getElementById('yardCol').innerHTML += `<li class="list-group-item">${selCourse.data.holes[i].teeBoxes[j].yards}</li>`;
+            document.getElementById('yardCol').innerHTML += `<li class="list-group-item" id="y${j}">${selCourse.data.holes[i].teeBoxes[j].yards}</li>`;
             document.getElementById('parCol').innerHTML += `<li class="list-group-item">${selCourse.data.holes[i].teeBoxes[j].par}</li>`;
         }
+
+
+
     }
+    document.getElementById('yardCol').innerHTML += `<li class='list-group-item'>${tyrd}</li>`;
     for (let i = 0; i < players.length; i++) {
         donut = i;
         document.getElementById(`playerCol${donut}`).innerHTML += `
