@@ -136,11 +136,12 @@ Par
 
 </div>`
     }
-    let  tyrd = 0;
+    let  tyrd = 0, tpar = 0;
     for (let i = 0; i < selCourseHoles.length; i++) {
 
         document.getElementById('holeCol').innerHTML += `<li class="list-group-item">${i + 1}</li>`;
         for (let j = 0; j < 1; j++) {
+            tpar = tpar + parseInt(`${selCourse.data.holes[i].teeBoxes[j].par}`);
             tyrd = tyrd + parseInt(`${selCourse.data.holes[i].teeBoxes[j].yards}`);
             document.getElementById('hcapCol').innerHTML += `<li class="list-group-item">${selCourse.data.holes[i].teeBoxes[j].hcp}</li>`;
             document.getElementById('yardCol').innerHTML += `<li class="list-group-item" id="y${j}">${selCourse.data.holes[i].teeBoxes[j].yards}</li>`;
@@ -151,6 +152,7 @@ Par
 
     }
     document.getElementById('yardCol').innerHTML += `<li class='list-group-item'>${tyrd}</li>`;
+    document.getElementById('parCol').innerHTML += `<li class='list-group-item'>${tpar}</li>`;
     for (let i = 0; i < players.length; i++) {
         donut = i;
         document.getElementById(`playerCol${donut}`).innerHTML += `
