@@ -65,7 +65,7 @@ function inputPlayers() {
       <option>4</option>
     </select>
     <div id="aBomb"><div><label class="fadeIn">Name: <input class='fadeIn' style="margin-top: 10px;" id="P0" onchange="playerPush()" oninput="playerPush()" onload="playerPush()"></label></div>
-    <div>
+    <div> 
 <label for="teeBox" class="fadeIn">Select Tee:</label>
 <select id="teeBox" class="fadeIn">
 <option>Pro</option>
@@ -138,7 +138,6 @@ Par
     }
     let  tyrd = 0, tpar = 0;
     for (let i = 0; i < selCourseHoles.length; i++) {
-
         document.getElementById('holeCol').innerHTML += `<li class="list-group-item">${i + 1}</li>`;
         for (let j = 0; j < 1; j++) {
             tpar = tpar + parseInt(`${selCourse.data.holes[i].teeBoxes[j].par}`);
@@ -147,9 +146,6 @@ Par
             document.getElementById('yardCol').innerHTML += `<li class="list-group-item" id="y${j}">${selCourse.data.holes[i].teeBoxes[j].yards}</li>`;
             document.getElementById('parCol').innerHTML += `<li class="list-group-item">${selCourse.data.holes[i].teeBoxes[j].par}</li>`;
         }
-
-
-
     }
     document.getElementById('yardCol').innerHTML += `<li class='list-group-item'>${tyrd}</li>`;
     document.getElementById('parCol').innerHTML += `<li class='list-group-item'>${tpar}</li>`;
@@ -187,10 +183,10 @@ function updateScore() {
         }
         document.getElementById(`total${players[i].value}`).innerText = totalScore;
         if (totalScore > 0) {
-            document.getElementById(`note${players[i].value}`).innerText = '✓';
+            document.getElementById(`note${players[i].value}`).innerText = '✘';
         } else {
             if (totalScore < 0) {
-                document.getElementById(`note${players[i].value}`).innerText = '✘';
+                document.getElementById(`note${players[i].value}`).innerText = '✓';
             } else {
                 document.getElementById(`note${players[i].value}`).innerText = 'OK';
             }
