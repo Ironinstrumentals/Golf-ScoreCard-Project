@@ -164,7 +164,7 @@ ${players[donut].value}
     document.getElementById('holeCol').innerHTML += `<li class='list-group-item'>Note:</li>`;
     for (let i = 0; i < players.length; i++) {
         document.getElementById(`playerCol${i}`).innerHTML += `<li class='list-group-item' id="total${players[i].value}">0</li>`;
-        document.getElementById(`playerCol${i}`).innerHTML += `<li class='list-group-item' id="note${players[i].value}">OK</li>`
+        document.getElementById(`playerCol${i}`).innerHTML += `<li class='list-group-item' id="note${players[i].value}">✓</li>`
     }
 }
 function updateScore() {
