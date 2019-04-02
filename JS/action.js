@@ -1,4 +1,4 @@
-let Box, selCourseID, selCourse, selCourseHoles, playerNumBox, donut, players = [], totalScore = 0;
+let Box, selCourseID, selCourse, selCourseHoles, playerNumBox, donut, players = [], totalScore = 0, tyrd = 0, tpar = 0;;
 getCourses();
 function getCourses() {
     var xhttp = new XMLHttpRequest();
@@ -136,7 +136,8 @@ Par
 
 </div>`
     }
-    let  tyrd = 0, tpar = 0;
+    tyrd = 0;
+    tpar = 0;
     for (let i = 0; i < selCourseHoles.length; i++) {
         document.getElementById('holeCol').innerHTML += `<li class="list-group-item">${i + 1}</li>`;
         for (let j = 0; j < 1; j++) {
@@ -182,14 +183,21 @@ function updateScore() {
             }
         }
         document.getElementById(`total${players[i].value}`).innerText = totalScore;
-        if (totalScore > 0) {
-            document.getElementById(`note${players[i].value}`).innerText = '✘';
-        } else {
-            if (totalScore < 0) {
-                document.getElementById(`note${players[i].value}`).innerText = '✓';
-            } else {
-                document.getElementById(`note${players[i].value}`).innerText = 'OK';
+        for (let i = 0; i < selCourseHoles.length; i++) {
+            for (let j = 0; j < 1; j++) {
+                if (totalScore > tpar) {
+                    document.getElementById(`note${players[i].value}`).innerText = '✘';
+                } else {
+                    if (totalScore < tpar) {
+                        document.getElementById(`note${players[i].value}`).innerText = '✓';
+                    } else {
+                        document.getElementById(`note${players[i].value}`).innerText = 'OK';
+                    }
+                }
+
+
             }
         }
+
     }
 }
