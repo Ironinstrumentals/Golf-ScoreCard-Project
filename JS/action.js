@@ -1,4 +1,5 @@
 let Box, selCourseID, selCourse, selCourseHoles, playerNumBox, donut, players = [], totalScore = 0;
+let  tyrd = 0, tpar = 0;
 getCourses();
 function getCourses() {
     var xhttp = new XMLHttpRequest();
@@ -136,7 +137,7 @@ Par
 
 </div>`
     }
-    let  tyrd = 0, tpar = 0;
+
     for (let i = 0; i < selCourseHoles.length; i++) {
         document.getElementById('holeCol').innerHTML += `<li class="list-group-item">${i + 1}</li>`;
         for (let j = 0; j < 1; j++) {
@@ -163,7 +164,7 @@ ${players[donut].value}
     document.getElementById('holeCol').innerHTML += `<li class='list-group-item'>Note:</li>`;
     for (let i = 0; i < players.length; i++) {
         document.getElementById(`playerCol${i}`).innerHTML += `<li class='list-group-item' id="total${players[i].value}">0</li>`;
-        document.getElementById(`playerCol${i}`).innerHTML += `<li class='list-group-item' id="note${players[i].value}">✓</li>`
+        document.getElementById(`playerCol${i}`).innerHTML += `<li class='list-group-item' id="note${players[i].value}">OK</li>`
     }
 }
 function updateScore() {
@@ -182,7 +183,8 @@ function updateScore() {
             }
         }
         document.getElementById(`total${players[i].value}`).innerText = totalScore;
-        if (totalScore > 0) {
+
+        if (totalScore > tpar) {
             document.getElementById(`note${players[i].value}`).innerText = '✘';
         } else {
             if (totalScore < 0) {
